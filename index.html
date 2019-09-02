@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Quiz</title>
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+	<style type="text/css">
+		
+		body {
+			font-family: 'Poppins', sans-serif;
+
+		}
+		 #container {
+		 	height: 400px;
+		 	width: 650px;
+		 	background-color: #6C7A86;
+		 	margin: auto auto;
+		 	box-shadow: 20px 20px 50px grey;
+		 }
+
+		 #pergunta {
+
+		 	border: 3px solid #6C7A86;
+		 	background-color: white;
+		 	text-align: center;
+		 	font-size: 2em;
+
+		 }
+
+		 .opcao {
+		 	float: left;
+		 	width: 280px;
+		 	height: 114px;
+		 	padding: 20px;
+		 	margin: 20px;
+		 	font-size: 2em;
+		 }
+
+		 .opcao:hover {
+		 	background-color: #ffcc13;
+		 	color: white;
+		 	border: 1px solid black;
+		 }
+
+		 #modal {
+		 	display: none;
+		 	border: 1px solid black;
+		 	height: 250px;
+		 	width: 400px;
+		 	background-color: white;
+		 	position: absolute;
+		 	top: 10%;
+		 	left: 35%;
+		 }
+
+
+
+
+	</style>
+</head>
+<body>
+
+
+
+
+
+
+
+     	<div id="container">
+		<div id="pergunta"></div>
+		<button type="button" id="opcao1" value="1" class="btn btn-light btn-sm opcao"></button>
+		<button type="button" id="opcao2" value="2" class="btn btn-light btn-sm opcao"></button>
+		<button type="button" id="opcao3" value="3" class="btn btn-light btn-sm opcao"></button>
+		<button type="button" id="opcao4" value="4" class="btn btn-light btn-sm opcao" ></button>
+		
+
+
+
+		<button class="btn btn-light" type="button" onclick="proximaQuestao()">Próxima questão</button>
+	</div>
+
+
+
+	<div class="modal" id="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title" id="modal-titulo"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" onclick="voltar()">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-texto">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="voltar()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+	<script type="text/javascript">
+	
+
+	var opcoes = [["Programar é divertido?", "Sim", "Não", "Talvez", "N.D.A"], ["C é uma linguagem tipada?", "Sim", "Não", "Talvez", "N.D.A"]]
+	 document.getElementById('pergunta').innerHTML = opcoes[0][0]
+	document.getElementById('opcao1').innerHTML = opcoes[0][1]
+	document.getElementById('opcao2').innerHTML = opcoes[0][2]
+	document.getElementById('opcao3').innerHTML = opcoes[0][3]
+	document.getElementById('opcao4').innerHTML = opcoes[0][4]
+	
+
+	function proximaQuestao() {
+		for(var i=0; i<=2; i++) {
+			 
+	document.getElementById('pergunta').innerHTML = opcoes[i][0]
+	document.getElementById('opcao1').innerHTML = opcoes[i][1]
+	document.getElementById('opcao2').innerHTML = opcoes[i][2]
+	document.getElementById('opcao3').innerHTML = opcoes[i][3]
+	document.getElementById('opcao4').innerHTML = opcoes[i][4]	
+			
+	
+		}
+		
+		 
+		nextQuestion.pularQuestao()
+		
+	}
+	
+
+
+
+	
+
+	
+	var opcao1 = document.getElementById('opcao1')
+	var opcao2 = document.getElementById('opcao2')
+	var opcao3 = document.getElementById('opcao3')
+	var opcao4 = document.getElementById('opcao4')
+
+	opcao1.addEventListener("click", function(){ document.getElementById('modal').style.display = "block"
+	document.getElementById('modal-titulo').innerHTML = "Parabéns!!" 
+	document.getElementById('modal-texto').innerHTML = "Você acertou a alternativa correta!!"   
+	})
+	opcao2.addEventListener("click", function(){ document.getElementById('modal').style.display = "block"
+	document.getElementById('modal-titulo').innerHTML = "Tente novamente!!" 
+	document.getElementById('modal-texto').innerHTML = "Você errou a alternativa correta!!"    })
+	opcao3.addEventListener("click", function(){ document.getElementById('modal').style.display = "block"
+	document.getElementById('modal-titulo').innerHTML = "Tente novamente!!" 
+	document.getElementById('modal-texto').innerHTML = "Você errou a alternativa correta!!"    })
+	opcao4.addEventListener("click", function(){ document.getElementById('modal').style.display = "block"
+	document.getElementById('modal-titulo').innerHTML = "Tente novamente!!" 
+	document.getElementById('modal-texto').innerHTML = "Você errou a alternativa correta!!"    })
+
+
+
+
+	
+
+
+function voltar() {
+	window.location.href = "quiz.html"
+}
+
+
+
+	</script>
+
+	
+</body>
+</html>
